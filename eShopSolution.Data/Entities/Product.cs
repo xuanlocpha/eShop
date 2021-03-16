@@ -7,7 +7,6 @@ namespace eShopSolution.Data.Entities
     public class Product
     {
         public int Id { get; set; }
-        public string ProductName { set; get; }
         public string Introduce { set; get; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { set; get; }
