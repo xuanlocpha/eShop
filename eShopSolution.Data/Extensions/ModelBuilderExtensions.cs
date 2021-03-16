@@ -1,5 +1,6 @@
 ﻿using eShopSolution.Data.Entities;
 using eShopSolution.Data.Enums;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -86,6 +87,42 @@ namespace eShopSolution.Data.Extensions
                   new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
                   new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
                     );
+
+
+            // any guid
+            var roleId = new Guid("B09219DB-8402-414A-8938-60D964AC45FB");
+            var adminId = new Guid("82A0B7C3-551B-44A7-8DB2-A7352E41C547");
+           
+
+            // any guid, but nothing is against to use the same one 
+
+            // AspNetRole
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = adminId,
+                Name = "Admin1",
+                NormalizedName = "admin 1",
+                Description = "Administrator role"
+            });
+
+
+
+            // AspNetUser
+            var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = adminId,
+                UserName = "User",
+                NormalizedUserName = "Xuân Lộc",
+                Email = "xuanloc.hcm2018@gmail.com",
+                NormalizedEmail = "xuanloc.hcm2018@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "P@ssword1"),
+                SecurityStamp = string.Empty,
+                DisplayName = " Xuân Lộc",
+                Gender = Gender.Male,
+               
+            });
 
         }
     }
