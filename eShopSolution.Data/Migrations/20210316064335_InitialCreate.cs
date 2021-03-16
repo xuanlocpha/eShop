@@ -73,7 +73,7 @@ namespace eShopSolution.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 16, 11, 43, 6, 348, DateTimeKind.Local).AddTicks(5516)),
+                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2021, 3, 16, 13, 43, 34, 688, DateTimeKind.Local).AddTicks(7352)),
                     UserId = table.Column<Guid>(nullable: false),
                     ShipName = table.Column<string>(maxLength: 200, nullable: false),
                     ShipAddress = table.Column<string>(maxLength: 200, nullable: false),
@@ -92,7 +92,6 @@ namespace eShopSolution.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProductName = table.Column<string>(nullable: false),
                     Introduce = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     OriginalPrice = table.Column<decimal>(nullable: false),
@@ -280,6 +279,64 @@ namespace eShopSolution.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AppConfigs",
+                columns: new[] { "Key", "Value" },
+                values: new object[,]
+                {
+                    { "HomeTitle", "This is home page of eShopSolution" },
+                    { "HomeKeyword", "This is keyword of eShopSolution" },
+                    { "HomeDescription", "This is description of eShopSolution" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName", "IsShowHome", "ParentId", "SortOrder", "Status" },
+                values: new object[,]
+                {
+                    { 1, null, 1, 1, 1, 1 },
+                    { 2, null, 1, 1, 2, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "Id", "IsDefault", "Name" },
+                values: new object[,]
+                {
+                    { "vi", true, "Tiếng Việt" },
+                    { "en", false, "English" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "DateCreated", "Introduce", "OriginalPrice", "Price", "SeoAlias" },
+                values: new object[] { 1, new DateTime(2021, 3, 16, 13, 43, 34, 700, DateTimeKind.Local).AddTicks(3011), null, 250000m, 39000m, null });
+
+            migrationBuilder.InsertData(
+                table: "CategoryTranslations",
+                columns: new[] { "Id", "CategoryId", "LanguageId", "Name", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, 1, "vi", "Áo nam", "ao-nam", "Sản phẩm áo thời trang nam", "Sản phẩm áo thời trang nam" },
+                    { 3, 2, "vi", "Áo nữ", "ao-nu", "Sản phẩm áo thời trang nữ", "Sản phẩm áo thời trang women" },
+                    { 2, 1, "en", "Men Shirt", "men-shirt", "The shirt products for men", "The shirt products for men" },
+                    { 4, 2, "en", "Women Shirt", "women-shirt", "The shirt products for women", "The shirt products for women" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductInCategories",
+                columns: new[] { "CategoryId", "ProductId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "ProductTranslations",
+                columns: new[] { "Id", "Description", "Details", "LanguageId", "Name", "ProductId", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, "Samsung Note 10+ đên với camera 48MP", "Samsung Note 10+ new", "vi", "Samsung Note 10+", 1, "Samsung Note 10+", "Samsung Note 10+", "Samsung Note 10+ new " },
+                    { 2, "Samsung-Note-10+", "Samsung-Note-10+", "en", "Samsung Note 10+", 1, "Samsung-Note-10+", "Samsung-Note-10+", "Samsung-Note-10+" }
                 });
 
             migrationBuilder.CreateIndex(
