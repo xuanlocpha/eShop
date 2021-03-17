@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShopSolution.Data.EF;
 
 namespace eShopSolution.Data.Migrations
 {
     [DbContext(typeof(EShopDBContext))]
-    partial class EShopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210316164845_InitialImage")]
+    partial class InitialImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +172,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("82a0b7c3-551b-44a7-8db2-a7352e41c547"),
-                            ConcurrencyStamp = "19af0ca1-9bed-40ab-ab7c-720d90a90cf1",
+                            ConcurrencyStamp = "60615ed5-f769-4b9d-9cd6-7e4a4c7faf56",
                             Description = "Administrator role",
                             Name = "Admin1",
                             NormalizedName = "admin 1"
@@ -245,7 +247,7 @@ namespace eShopSolution.Data.Migrations
                         {
                             Id = new Guid("82a0b7c3-551b-44a7-8db2-a7352e41c547"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f5e90f9d-aa7c-4ad1-abcc-e09412d76bbf",
+                            ConcurrencyStamp = "7261b889-128c-4d4a-a168-4e11c73cc163",
                             DisplayName = " Xuân Lộc",
                             Email = "xuanloc.hcm2018@gmail.com",
                             EmailConfirmed = true,
@@ -253,7 +255,7 @@ namespace eShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "xuanloc.hcm2018@gmail.com",
                             NormalizedUserName = "Xuân Lộc",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHQEfr+F3esZVwITw9Bbeim38RZbzPN00lvruL4yBSzElTu2NbkEiTKXW9AWl2wvqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGq7CNMkDMCzKyrzdgSuYTBru3NY+f+Y0ReQUkcQFmZ+8eayFH6dYUdPRyWnX1eK7g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -509,7 +511,7 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2021, 3, 17, 10, 35, 23, 312, DateTimeKind.Local).AddTicks(5157));
+                        .HasDefaultValue(new DateTime(2021, 3, 16, 23, 48, 43, 842, DateTimeKind.Local).AddTicks(6000));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -608,7 +610,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 3, 17, 10, 35, 23, 331, DateTimeKind.Local).AddTicks(6052),
+                            DateCreated = new DateTime(2021, 3, 16, 23, 48, 43, 869, DateTimeKind.Local).AddTicks(6564),
                             OriginalPrice = 250000m,
                             Price = 39000m,
                             Stock = 0,
@@ -632,9 +634,6 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
@@ -643,15 +642,15 @@ namespace eShopSolution.Data.Migrations
                     b.Property<bool>("IsDefaul")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<int>("SortOrder")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("productId");
 
                     b.ToTable("ProductImages");
                 });
@@ -897,7 +896,7 @@ namespace eShopSolution.Data.Migrations
                 {
                     b.HasOne("eShopSolution.Data.Entities.Product", "Product")
                         .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopSolution.Appliaction.Catalog.Product.Dtos
+namespace eShopSolution.ViewModels.Catalog.Product
 {
-    public class ProductViewModel
+    public class ProductCreateRequest
     {
         public int Id { get; set; }
         public string Introduce { set; get; }
@@ -14,7 +15,6 @@ namespace eShopSolution.Appliaction.Catalog.Product.Dtos
         public int ViewCount { set; get; }
 
         public DateTime DateCreated { set; get; }
-      
 
         public string Name { set; get; }
         public string Description { set; get; }
@@ -24,5 +24,7 @@ namespace eShopSolution.Appliaction.Catalog.Product.Dtos
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
+
+        public IFormFile ThumbnailImage { get; set; }
     }
 }

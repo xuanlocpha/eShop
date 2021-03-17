@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShopSolution.Data.EF;
 
 namespace eShopSolution.Data.Migrations
 {
     [DbContext(typeof(EShopDBContext))]
-    partial class EShopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210317024151_UpdataImage")]
+    partial class UpdataImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +172,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("82a0b7c3-551b-44a7-8db2-a7352e41c547"),
-                            ConcurrencyStamp = "19af0ca1-9bed-40ab-ab7c-720d90a90cf1",
+                            ConcurrencyStamp = "7724f2b4-72ac-4f88-92de-9ac157e52380",
                             Description = "Administrator role",
                             Name = "Admin1",
                             NormalizedName = "admin 1"
@@ -245,7 +247,7 @@ namespace eShopSolution.Data.Migrations
                         {
                             Id = new Guid("82a0b7c3-551b-44a7-8db2-a7352e41c547"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f5e90f9d-aa7c-4ad1-abcc-e09412d76bbf",
+                            ConcurrencyStamp = "c5f50f8a-3f4c-48cd-874d-286b5324a58c",
                             DisplayName = " Xuân Lộc",
                             Email = "xuanloc.hcm2018@gmail.com",
                             EmailConfirmed = true,
@@ -253,7 +255,7 @@ namespace eShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "xuanloc.hcm2018@gmail.com",
                             NormalizedUserName = "Xuân Lộc",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHQEfr+F3esZVwITw9Bbeim38RZbzPN00lvruL4yBSzElTu2NbkEiTKXW9AWl2wvqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFiYyoOUipK8w+WLtxuuRuJYu4S8jgENzHrzGbczwr2EpYqsVjRFXSNVKyB0K8JNow==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -509,7 +511,7 @@ namespace eShopSolution.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2021, 3, 17, 10, 35, 23, 312, DateTimeKind.Local).AddTicks(5157));
+                        .HasDefaultValue(new DateTime(2021, 3, 17, 9, 41, 51, 336, DateTimeKind.Local).AddTicks(522));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -608,7 +610,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 3, 17, 10, 35, 23, 331, DateTimeKind.Local).AddTicks(6052),
+                            DateCreated = new DateTime(2021, 3, 17, 9, 41, 51, 348, DateTimeKind.Local).AddTicks(7737),
                             OriginalPrice = 250000m,
                             Price = 39000m,
                             Stock = 0,
@@ -643,15 +645,15 @@ namespace eShopSolution.Data.Migrations
                     b.Property<bool>("IsDefaul")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<int>("SortOrder")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("productId");
 
                     b.ToTable("ProductImages");
                 });
@@ -897,7 +899,7 @@ namespace eShopSolution.Data.Migrations
                 {
                     b.HasOne("eShopSolution.Data.Entities.Product", "Product")
                         .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

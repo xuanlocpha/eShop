@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopSolution.Appliaction.Catalog.Product.Dtos.Manage
+namespace eShopSolution.Appliaction.Catalog.Product
 {
-   public class ProductEditRequest
+    public class ProductViewModel
     {
         public int Id { get; set; }
+        public string Introduce { set; get; }
+        public decimal Price { get; set; }
+        public decimal OriginalPrice { set; get; }
+        public int Stock { set; get; }
+        public int ViewCount { set; get; }
+
+        public DateTime DateCreated { set; get; }
+      
+
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
