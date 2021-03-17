@@ -1,11 +1,11 @@
-﻿using eShopSolution.Appliaction.Dtos;
+﻿using eShopSolution.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopSolution.Appliaction.Catalog.Product.Dtos.Manage
+namespace eShopSolution.ViewModels.Catalog.Product
 {
-    public class GetProductPagingRequest : PagingRequestBase
+    public class GetManageProductPagingRequest : PagingRequestBase
     {
         public string KeyWord { get; set; }
 
