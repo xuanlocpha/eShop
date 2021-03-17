@@ -30,7 +30,7 @@ namespace eShopSolution.Appliaction.Catalog.Product
             _storageService = storageService;
         }
 
-        public Task<int> AddImages(int productId, List<IFormFile> files)
+        public async Task<int> AddImages(int productId, List<IFormFile> files)
         {
             throw new NotImplementedException();
         }
@@ -65,19 +65,24 @@ namespace eShopSolution.Appliaction.Catalog.Product
                 }
             };
             //Save Image
-            if(request.ThumbnailImage != null)
+            if (request.ThumbnailImage != null)
             {
-                var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefaul == true && i.ProductId == request.Id);
-                if(thumbnailImage != null)
+                product.ProductImages = new List<ProductImage>()
                 {
-                    thumbnailImage.FileSize = request.ThumbnailImage.Length;
-                    thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
-                    _context.ProductImages.Update(thumbnailImage);
-                }
-               
+                    new ProductImage()
+                    {
+                        Caption = "Thumbnail image",
+                        DateCreated = DateTime.Now,
+                        FileSize = request.ThumbnailImage.Length,
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
             }
             _context.Products.Add(product);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return product.Id;
         }
 
         public async Task<int> delete(int productId)
@@ -160,6 +165,28 @@ namespace eShopSolution.Appliaction.Catalog.Product
                 Items = data
             };
             return pagedResult;
+        }
+
+        public async Task<ProductViewModel> GetById(int productId , string languageId)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId && x.LanguageId == languageId);
+            var productViewModel = new ProductViewModel()
+            {
+                Id = product.Id,
+                DateCreated = product.DateCreated,
+                Description = productTranslation != null ? productTranslation.Description : null,
+                LanguageId = productTranslation != null ? productTranslation.LanguageId : null,
+                Name = productTranslation != null ? productTranslation.Name : null,
+                OriginalPrice = product.OriginalPrice,
+                Price = product.Price,
+                SeoAlias = productTranslation != null ? productTranslation.SeoAlias : null,
+                SeoDescription = productTranslation != null ? productTranslation.SeoDescription : null,
+                SeoTitle = productTranslation != null ? productTranslation.SeoTitle : null,
+                Stock = product.Stock,
+                ViewCount = product.ViewCount
+            };
+            return productViewModel;
         }
 
         public async Task<List<ProductImageViewModel>> GetListImage(int productId)

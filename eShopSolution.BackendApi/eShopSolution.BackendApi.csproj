@@ -5,9 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\eShopSolution.Appliaction\eShopSolution.Appliaction.csproj" />
     <ProjectReference Include="..\eShopSolution.Data\eShopSolution.Data.csproj" />
     <ProjectReference Include="..\eShopSolution.Utilities\eShopSolution.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\user-content\" />
   </ItemGroup>
 
 </Project>
