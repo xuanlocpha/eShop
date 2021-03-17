@@ -22,6 +22,7 @@ namespace eShopSolution.Appliaction.Catalog.Product
 
         Task AddViewCount(int productId);
 
+
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
         Task<int> AddImages(int productId, List<IFormFile> files);
@@ -31,5 +32,7 @@ namespace eShopSolution.Appliaction.Catalog.Product
         Task<int> EditImages(int productId ,string caption , bool isDefault);
 
         Task<List<ProductImageViewModel>> GetListImage(int productId);
+
+        Task<ProductViewModel> GetById(int productId , string languageId);
     }
 }
